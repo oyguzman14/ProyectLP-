@@ -1,0 +1,22 @@
+#Miguel
+<?php
+$entero=4; 
+$float=4.1143; 
+$boolean=false;
+$suma=4+(3+5); 
+$resta=(5-3); 
+$multi=5*5;
+$division=100/25;
+$oracion="Hola miguel bb y arlek bb";
+$contador=10;
+while($contador>0){
+ echo $contador,"\n";
+ $contador--;}
+shuffle($casas);
+function recursividad($a)
+{
+ if ($a < 20) {
+ echo $a,"\n";
+ recursividad($a + 1);
+ }
+?>
