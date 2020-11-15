@@ -7,7 +7,11 @@ reservadas={
         "print": "PRINT",
         "shuffle":"SHUFFLE",
         "function":"FUNCTION",
-
+        #Arlek
+        "foreach":"FOREACH",
+        "array_key_first":"ARRAY_KEY_FIRST",
+	    "as":"AS",
+        "array":"ARRAY",
         #Odalys Guzman
         "if":"IF",
         "else":"ELSE",
@@ -42,7 +46,19 @@ tokens=(
         "NUMERO",
         "DECIMAL",
         "BOOLEAN",
-        "COMA"
+        "COMA",
+        #ARLEK
+        "FLECHA",
+	    "MENOR_IGUAL",
+	    "MAYOR_IGUAL",
+	    "INCREMENTO",
+	    "DECREMENTO",
+	    "INCREMENTO_C",
+	    "DECREMENTO_C",
+	    "CONCATENA_C",
+	    "INCIO",
+	    "FIN",
+        "COMMENT"
         )+tuple(reservadas.values())
 
 #Miguel Rivadeneira
@@ -64,6 +80,23 @@ t_PRINT=r'print'
 t_SHUFFLE=r'shuffle'
 t_STRING=r'(\"[\w\s\\n]+\"|\'[\w\s\\n]+\')'
 t_FUNCTION=r'function'
+
+#ARLEK
+t_MENOR_IGUAL=r'\<='
+t_MAYOR_IGUAL=r'\>='
+t_INCREMENTO=r'\+\+'
+t_DECREMENTO=r'\-\-'
+t_INCREMENTO_C=r'\+='
+t_DECREMENTO_C=r'\-='
+t_CONCATENA_C=r'\.='
+t_INCIO=r'<\?php'
+t_FIN=r'\?.'
+t_FLECHA=r'=>'
+t_FOREACH=r'foreach'
+t_ARRAY_KEY_FIRST=r'array_key_first'
+t_AS=r'as'
+t_ARRAY=r'array'
+
 
 #Odalys Guzman
 t_AND=r'and'
@@ -101,6 +134,11 @@ t_ignore = ' \t'
 def t_COMMENT(t):
         r'\#.*'
         pass
+
+#Arlek
+def t_error(t):
+	print("No es reconocido '%s'" % t.value[0])
+	t.lexer.skip(1)
 
 
 lexer=lex.lex()

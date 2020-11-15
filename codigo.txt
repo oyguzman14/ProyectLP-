@@ -38,3 +38,20 @@ str_shuffle($hola);
 str_repeat("jeje",5);
 #DFGGG
 ?>
+
+#Arlek
+$comp8=1 or 0;
+$comp9=!0;
+++$numero;
+--$suma1;
+$entero+=10;
+$nentero-=8;
+$oracion .= "soyOdalys";
+echo "Hola","mucho","gusto";
+print "Hay que hacer dieta";
+$vocales=array('hola' => "chao","hi" => "goodbye");
+$edades= array(1,2,3,4,5,6,7,8,9,10);
+foreach($edades as $edad){
+ echo $edad;}
+array_key_first($numeros);
+
