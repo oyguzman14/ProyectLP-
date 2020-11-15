@@ -1,15 +1,22 @@
 import ply.lex as lex
 
 reservadas={
-        #Miguel
+        #Miguel Rivadeneira
         "while":"WHILE",
         "echo": "ECHO",
         "print": "PRINT",
         "shuffle":"SHUFFLE",
         "function":"FUNCTION",
+
+        #Odalys Guzman
+        "if":"IF",
+        "else":"ELSE",
+        "str_repeat":"STR_REPEAT",
+        "str_shuffle":"STR_SHUFFLE"
 	}
 
-tokens=(#MIGUEL
+tokens=(
+        #Miguel Rivadeneira
         "IGUAL",
         "VARIABLE",
         "MAS",
@@ -24,9 +31,21 @@ tokens=(#MIGUEL
         "MENOR_QUE",
         "NOMBRE_FUNCION",
         "STRING",
+        #Odalys Guzman
+        "AND",
+        "OR",
+        "NEGACION",
+        "PARENTESIS_I",
+        "PARENTESIS_D",
+        "LLAVE_I",
+        "LLAVE_D",
+        "NUMERO",
+        "DECIMAL",
+        "BOOLEAN",
+        "COMA"
         )+tuple(reservadas.values())
 
-#MIGUEL
+#Miguel Rivadeneira
 t_IGUAL=r'='
 t_VARIABLE=r'(\$([a-z]|[A-Z]))([a-zA-Z0-9]+)?'
 t_MAS=r'\+'
@@ -46,8 +65,25 @@ t_SHUFFLE=r'shuffle'
 t_STRING=r'(\"[\w\s\\n]+\"|\'[\w\s\\n]+\')'
 t_FUNCTION=r'function'
 
+#Odalys Guzman
+t_AND=r'and'
+t_OR=r'or'
+t_NEGACION=r'\!'
+t_PARENTESIS_I=r'\('
+t_PARENTESIS_D=r'\)'
+t_LLAVE_I=r'\{'
+t_LLAVE_D=r"\}"
+t_NUMERO=r'\d+'
+t_DECIMAL=r'[+-]?[0-9]*\.[0-9]+'
+t_BOOLEAN=r'(true|false|[0-1])'
+t_COMA=r'\,'
+t_IF=r'if'
+t_STR_REPEAT=r'str_repeat'
+t_STR_SHUFFLE=r'str_shuffle'
+t_ELSE=r'else'
 
-#MIGUEL
+
+#Miguel Rivadeneira
 def t_NOMBRE_FUNCION(t):
         r'[a-zA-Z][a-zA-Z0-9_]*'
         if t.value in list(reservadas.keys()):
@@ -60,6 +96,11 @@ def t_newline(t):
 	t.lexer.lineno += len(t.value)
 
 t_ignore = ' \t'
+
+#Odalys Guzman
+def t_COMMENT(t):
+        r'\#.*'
+        pass
 
 
 lexer=lex.lex()

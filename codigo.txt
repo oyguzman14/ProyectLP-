@@ -19,4 +19,22 @@ function recursividad($a)
  echo $a,"\n";
  recursividad($a + 1);
  }
+
+#Odalys
+$mod=45%5; 
+$comp1=4<5; 
+$comp2=5>7; 
+$comp3=5!=34; 
+$comp4=4==3; 
+$comp5=5>=5; 
+$comp6=34<=54; 
+$comp7=1 and 1;
+if($nota>=60){
+ echo "Aprobo\n";
+}else{
+ echo "No aprobo\n" ;
+}
+str_shuffle($hola);
+str_repeat("jeje",5);
+#DFGGG
 ?>
