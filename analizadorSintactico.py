@@ -6,8 +6,12 @@ from analizadorLexico import tokens
 def p_expresion(p):
   'expresion : valor'
 
+
 def p_operacionMat(p):
-  'expresion : valor operadoresMat expresion'
+  '''expresion : valor operadoresMat expresion
+               | PARENTESIS_I expresion PARENTESIS_D
+               | expresion operadoresMat expresion
+  '''
 
 def p_operadoresMat(p):
   '''operadoresMat  : MAS
@@ -16,9 +20,14 @@ def p_operadoresMat(p):
                     | POR
                     | MODULO
   '''
+
+def asignacion(p):
+  'expresion : VARIABLE IGUAL expresion PUNTO_COMA'
+
 def p_valor(p):
   '''valor  : NUMERO
             | VARIABLE
+            | DECIMAL
   '''
 
 parser = yacc.yacc()
