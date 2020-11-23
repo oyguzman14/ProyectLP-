@@ -76,6 +76,17 @@ def p_concatenacion(p):
   '''concatenacion : VARIABLE CONCATENA_C STRING
   '''
 
+#Arlette
+
+def p_estructuras_de_control(p):
+  '''estructuras_de_control : sentencia_if
+                            | sentencia_while
+                            | sentencia_foreach
+  '''
+def p_sentencia_foreach(p):
+  '''sentencia_foreach : FOREACH PARENTESIS_I VARIABLE AS VARIABLE PARENTESIS_D LLAVE_I sentencias_estructuras LLAVE_D
+  '''
+
 #MIGUEL
 def p_sentencia_while(p):
   '''sentencia_while : WHILE PARENTESIS_I argumentos_estructuras PARENTESIS_D LLAVE_I sentencias_estructuras LLAVE_D
