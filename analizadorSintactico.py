@@ -60,12 +60,24 @@ def p_concatenacion(p):
   '''concatenacion : VARIABLE CONCATENA_C STRING
   '''
 
-
 #MIGUEL
 def p_sentencia_while(p):
   '''sentencia_while : WHILE PARENTESIS_I argumentos_estructuras PARENTESIS_D LLAVE_I sentencias_estructuras LLAVE_D
   '''
+#Odalys
+def p_sentencia_if(p):
+  '''sentencia_if : IF PARENTESIS_I argumentos_estructuras PARENTESIS_D LLAVE_I sentencias_estructuras LLAVE_D estructura_else
+  '''
+def p_estructura_else(p):
+  '''estructura_else  : ELSE LLAVE_I sentencias_estructuras LLAVE_D
+                      | empty
+  '''
+def p_aregumentos_estructuras(p):
+  '''argumentos_estructuras : operacion_logica
+                            | operacion_comparacion
+  '''
 
+#Miguel
 def p_llamda_a_funciones(p):
   '''llamada_a_funciones  : metodos PARENTESIS_I VARIABLE PARENTESIS_D PUNTO_COMA
                           | funcion_str_repeat
