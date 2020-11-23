@@ -41,6 +41,22 @@ def p_argumentos_impresion(p):
   '''argumentos_impresion : valor_impresion COMA argumentos_impresion
                           | valor_impresion
   '''
+
+
+#Arlette
+def p_asignacion(p):
+  '''asignacion : VARIABLE IGUAL cuerpo_asignacion PUNTO_COMA
+  '''
+def p_cuerpo_asignacion(p):
+  '''cuerpo_asignacion  : expresion
+                        | operacion_logica
+                        | STRING
+                        | booleans
+                        | crear_array
+  '''
+
+
+#Odalys
 def p_incrementos_decrementos_concatenacion(p):
   '''incrementos_decrementos_concatenacion : incremento_decremento PUNTO_COMA
                                            | incrementoc_decrementoc PUNTO_COMA
