@@ -241,6 +241,10 @@ def p_valor(p):
             | DECIMAL
   '''
 
+#Arlette
+def p_error(p):
+  print("Error de sintaxis")
+
 parser = yacc.yacc()
 
 while True:
