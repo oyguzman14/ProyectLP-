@@ -114,6 +114,11 @@ def p_estructura_array_v(p):
                         | valor_array
   '''
 
+def p_expresion(p):
+  '''expresion  : operacion_comparacion
+                | operacion_matematica
+  '''
+
 def p_operacion_logica(p):
   '''operacion_logica : operacion_comparacion operadores_logicos operacion_comparacion
                       | valor_negacion operadores_logicos valor_negacion
