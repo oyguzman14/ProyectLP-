@@ -24,7 +24,26 @@ def p_estructura_array(p):
   '''
 
 
-
+#Miguel
+def p_operadores_comp(p):
+  '''operadores_comp  : IGUALDAD
+                      | DESIGUALDAD
+                      | MAYOR_QUE
+                      | MENOR_QUE
+                      | MENOR_IGUAL
+                      | MAYOR_IGUAL
+  '''
+def p_operadores_matematicos(p):
+  '''operadores_matematicos : MAS
+                            | MENOS
+                            | POR
+                            | DIVIDE
+                            | MODULO
+  '''
+def p_operadores_logicos(p):
+  '''operadores_logicos : AND
+                        | OR
+  '''
 #Odalys Guzman
 def p_valor_i_c(p):
   '''valor_i_c  : NUMERO

@@ -17,7 +17,8 @@ reservadas = {
     "and":"AND",
     "or": "OR" ,
     "true" : "TRUE",
-    "false" : "FALSE" 
+    "false" : "FALSE",
+    "return" : "RETURN" 
 }
 
 tokens = (
@@ -51,7 +52,7 @@ tokens = (
     "INCREMENTO_C",
     "DECREMENTO_C",
     "CONCATENA_C",
-    "INCIO",
+    "INICIO",
     "FIN",
     "COMMENT") + tuple(reservadas.values())
 
@@ -67,7 +68,7 @@ t_IGUALDAD = r'=='
 t_DESIGUALDAD = r'\!\='
 t_MAYOR_QUE = r'>'
 t_MENOR_QUE = r'<'
-t_STRING = r'(\"[\w\s\\n]+\"|\'[\w\s\\n]+\')'
+t_STRING = r'("[\w\s\\n\?]+"|\'[\w\s\\n\?]+\')'
 t_MENOR_IGUAL = r'\<='
 t_MAYOR_IGUAL = r'\>='
 t_INCREMENTO = r'\+\+'
@@ -75,8 +76,8 @@ t_DECREMENTO = r'\-\-'
 t_INCREMENTO_C = r'\+='
 t_DECREMENTO_C = r'\-='
 t_CONCATENA_C = r'\.='
-t_INCIO = r'<\?php'
-t_FIN = r'\?.'
+t_INICIO = r'<\?php'
+t_FIN = r'\?>'
 t_FLECHA = r'=>'
 t_NEGACION = r'\!'
 t_PARENTESIS_I = r'\('
@@ -100,8 +101,8 @@ def t_newline(t):
 t_ignore = ' \t'
 
 def t_COMMENT(t):
-    r'\/\*/.*\*\/'
-    pass
+    r'\/\*.+\*\/'
+    return t
 
 def t_error(t):
     print("No es reconocido '%s'" % t.value[0])
