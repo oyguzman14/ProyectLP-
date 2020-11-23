@@ -1,7 +1,30 @@
 import ply.yacc as yacc
 from analizadorLexico import tokens
 
+#MIGUEL
+def p_sentencias_estructuras(p):
+  '''sentencias_estructuras : asignacion
+                            | llamada_a_funciones
+                            | impresiones
+                            | estructuras_de_control
+                            | incrementos_decrementos_concatenacion
+                            | comentarios  
+                            | sentencias_estructuras sentencias_estructuras
+'''
 
+def p_creacion_funciones(p):
+  '''creacion_funciones : FUNCTION NOMBRE_FUNCION PARENTESIS_I argumentos_funciones PARENTESIS_D LLAVE_I sentencias_estructuras retornar_valores LLAVE_D
+  '''
+def p_argumentos_funciones(p):
+  '''argumentos_funciones : VARIABLE COMA argumentos_funciones
+                          | VARIABLE
+                          | empty
+  '''
+def p_retornar_valores(p):
+  '''retornar_valores : RETURN valor_i_c PUNTO_COMA
+                      | RETURN funciones_creadas 
+                      | empty
+  '''
 #Odalys
 def p_comentarios(p):
   '''comentarios : COMMENT
