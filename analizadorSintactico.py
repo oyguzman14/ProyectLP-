@@ -108,7 +108,10 @@ def p_funciones_creadas(p):
   '''funciones_creadas : NOMBRE_FUNCION PARENTESIS_I operacion_matematica PARENTESIS_D PUNTO_COMA
   '''
 
-
+#Arlette
+def p_funcion_str_repeat(p):
+  ''' funcion_str_repeat : STR_REPEAT PARENTESIS_I STRING COMA NUMERO PARENTESIS_D PUNTO_COMA
+  '''
 
 
 #Odalys
