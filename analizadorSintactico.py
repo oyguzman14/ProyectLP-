@@ -9,7 +9,21 @@ def p_comentarios(p):
 def p_empty(p):
   '''empty :
   '''
-
+#MIGUEL
+def p_llamda_a_funciones(p):
+  '''llamada_a_funciones  : metodos PARENTESIS_I VARIABLE PARENTESIS_D PUNTO_COMA
+                          | funcion_str_repeat
+                          | funciones_creadas
+  '''
+def p_metodos(p):
+  '''metodos  : STR_SHUFFLE
+              | SHUFFLE
+              | ARRAY_KEY_FIRST
+  '''
+def p_funciones_creadas(p):
+  '''funciones_creadas : NOMBRE_FUNCION PARENTESIS_I operacion_matematica PARENTESIS_D PUNTO_COMA
+  '''
+#Odalys
 def p_impresiones(p):
   '''impresiones  : ECHO argumentos_impresion PUNTO_COMA
                   | PRINT valor_impresion PUNTO_COMA
