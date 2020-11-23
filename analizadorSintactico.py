@@ -3,6 +3,13 @@ from analizadorLexico import tokens
 
 
 #Odalys
+def p_comentarios(p):
+  '''comentarios : COMMENT
+  '''
+def p_empty(p):
+  '''empty :
+  '''
+
 def p_impresiones(p):
   '''impresiones  : ECHO argumentos_impresion PUNTO_COMA
                   | PRINT valor_impresion PUNTO_COMA
