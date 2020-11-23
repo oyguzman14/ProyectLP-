@@ -51,6 +51,26 @@ def p_operadores_logicos(p):
   '''operadores_logicos : AND
                         | OR
   '''
+
+#MIGUEL
+def p_valor_comp(p):
+  '''valor_comp : NUMERO
+                | VARIABLE
+                | booleans
+  '''
+def p_valor_negacion(p):
+  '''valor_negacion : VARIABLE
+                    | booleans
+  '''
+def p_booleans(p):
+  '''booleans : TRUE
+              | FALSE
+  '''
+def p_valor_impresion(p):
+  '''valor_impresion  : STRING
+                      | VARIABLE
+  '''
+
 #Odalys Guzman
 def p_valor_i_c(p):
   '''valor_i_c  : NUMERO
