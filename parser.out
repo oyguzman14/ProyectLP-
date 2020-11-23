@@ -2,447 +2,198 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    AND
-    ARRAY
-    ARRAY_KEY_FIRST
     AS
-    COMA
-    COMMENT
-    CONCATENA_C
-    DECREMENTO
-    DECREMENTO_C
-    DESIGUALDAD
-    ECHO
-    ELSE
-    FALSE
     FIN
     FLECHA
     FOREACH
-    FUNCTION
-    IF
     IGUAL
-    IGUALDAD
-    INCIO
-    INCREMENTO
-    INCREMENTO_C
-    LLAVE_D
-    LLAVE_I
-    MAYOR_IGUAL
-    MAYOR_QUE
-    MENOR_IGUAL
-    MENOR_QUE
-    NEGACION
-    NOMBRE_FUNCION
-    OR
-    PRINT
-    PUNTO_COMA
-    SHUFFLE
-    STRING
+    INICIO
     STR_REPEAT
-    STR_SHUFFLE
-    TRUE
-    WHILE
 
 Grammar
 
-Rule 0     S' -> expresion
-Rule 1     expresion -> valor
-Rule 2     expresion -> valor operadoresMat expresion
-Rule 3     expresion -> PARENTESIS_I expresion PARENTESIS_D
-Rule 4     expresion -> expresion operadoresMat expresion
-Rule 5     operadoresMat -> MAS
-Rule 6     operadoresMat -> MENOS
-Rule 7     operadoresMat -> DIVIDE
-Rule 8     operadoresMat -> POR
-Rule 9     operadoresMat -> MODULO
-Rule 10    valor -> NUMERO
-Rule 11    valor -> VARIABLE
-Rule 12    valor -> DECIMAL
+Rule 0     S' -> sentencias_estructuras
+Rule 1     sentencias_estructuras -> asignacion
+Rule 2     sentencias_estructuras -> llamada_a_funciones
+Rule 3     sentencias_estructuras -> impresiones
+Rule 4     sentencias_estructuras -> estructuras_de_control
+Rule 5     sentencias_estructuras -> incrementos_decrementos_concatenacion
+Rule 6     sentencias_estructuras -> comentarios
+Rule 7     sentencias_estructuras -> sentencias_estructuras sentencias_estructuras
+Rule 8     creacion_funciones -> FUNCTION NOMBRE_FUNCION PARENTESIS_I argumentos_funciones PARENTESIS_D LLAVE_I sentencias_estructuras retornar_valores LLAVE_D
+Rule 9     argumentos_funciones -> VARIABLE COMA argumentos_funciones
+Rule 10    argumentos_funciones -> VARIABLE
+Rule 11    argumentos_funciones -> empty
+Rule 12    retornar_valores -> RETURN valor_i_c PUNTO_COMA
+Rule 13    retornar_valores -> RETURN funciones_creadas
+Rule 14    retornar_valores -> empty
+Rule 15    comentarios -> COMMENT
+Rule 16    empty -> <empty>
+Rule 17    impresiones -> ECHO argumentos_impresion PUNTO_COMA
+Rule 18    impresiones -> PRINT valor_impresion PUNTO_COMA
+Rule 19    argumentos_impresion -> valor_impresion COMA argumentos_impresion
+Rule 20    argumentos_impresion -> valor_impresion
+Rule 21    incrementos_decrementos_concatenacion -> incremento_decremento PUNTO_COMA
+Rule 22    incrementos_decrementos_concatenacion -> incrementoc_decrementoc PUNTO_COMA
+Rule 23    incrementos_decrementos_concatenacion -> concatenacion PUNTO_COMA
+Rule 24    incremento_decremento -> INCREMENTO VARIABLE
+Rule 25    incremento_decremento -> DECREMENTO VARIABLE
+Rule 26    incremento_decremento -> VARIABLE INCREMENTO
+Rule 27    incremento_decremento -> VARIABLE DECREMENTO
+Rule 28    incrementoc_decrementoc -> VARIABLE INCREMENTO_C valor_i_c
+Rule 29    incrementoc_decrementoc -> VARIABLE DECREMENTO_C valor_i_c
+Rule 30    concatenacion -> VARIABLE CONCATENA_C STRING
+Rule 31    sentencia_while -> WHILE PARENTESIS_I argumentos_estructuras PARENTESIS_D LLAVE_I sentencias_estructuras LLAVE_D
+Rule 32    sentencia_if -> IF PARENTESIS_I argumentos_estructuras PARENTESIS_D LLAVE_I sentencias_estructuras LLAVE_D estructura_else
+Rule 33    estructura_else -> ELSE LLAVE_I sentencias_estructuras LLAVE_D
+Rule 34    estructura_else -> empty
+Rule 35    argumentos_estructuras -> operacion_logica
+Rule 36    argumentos_estructuras -> operacion_comparacion
+Rule 37    llamada_a_funciones -> metodos PARENTESIS_I VARIABLE PARENTESIS_D PUNTO_COMA
+Rule 38    llamada_a_funciones -> funcion_str_repeat
+Rule 39    llamada_a_funciones -> funciones_creadas
+Rule 40    metodos -> STR_SHUFFLE
+Rule 41    metodos -> SHUFFLE
+Rule 42    metodos -> ARRAY_KEY_FIRST
+Rule 43    funciones_creadas -> NOMBRE_FUNCION PARENTESIS_I operacion_matematica PARENTESIS_D PUNTO_COMA
+Rule 44    crear_array -> ARRAY PARENTESIS_I estructura_array PARENTESIS_D
+Rule 45    estructura_array -> estructura_array_c_v
+Rule 46    estructura_array -> estructura_array_v
+Rule 47    operacion_logica -> operacion_comparacion operadores_logicos operacion_comparacion
+Rule 48    operacion_logica -> valor_negacion operadores_logicos valor_negacion
+Rule 49    operacion_logica -> NEGACION valor_negacion
+Rule 50    operacion_comparacion -> valor_comp operadores_comp valor_comp
+Rule 51    operacion_comparacion -> PARENTESIS_I valor_comp operadores_comp valor_comp PARENTESIS_D
+Rule 52    operacion_matematica -> operacion_matematica operadores_matematicos operacion_matematica
+Rule 53    operacion_matematica -> PARENTESIS_I operacion_matematica PARENTESIS_D
+Rule 54    operacion_matematica -> operacionU operacion_matematica
+Rule 55    operacion_matematica -> valor
+Rule 56    operacionU -> MENOS
+Rule 57    operadores_comp -> IGUALDAD
+Rule 58    operadores_comp -> DESIGUALDAD
+Rule 59    operadores_comp -> MAYOR_QUE
+Rule 60    operadores_comp -> MENOR_QUE
+Rule 61    operadores_comp -> MENOR_IGUAL
+Rule 62    operadores_comp -> MAYOR_IGUAL
+Rule 63    operadores_matematicos -> MAS
+Rule 64    operadores_matematicos -> MENOS
+Rule 65    operadores_matematicos -> POR
+Rule 66    operadores_matematicos -> DIVIDE
+Rule 67    operadores_matematicos -> MODULO
+Rule 68    operadores_logicos -> AND
+Rule 69    operadores_logicos -> OR
+Rule 70    valor_comp -> NUMERO
+Rule 71    valor_comp -> VARIABLE
+Rule 72    valor_comp -> booleans
+Rule 73    valor_negacion -> VARIABLE
+Rule 74    valor_negacion -> booleans
+Rule 75    booleans -> TRUE
+Rule 76    booleans -> FALSE
+Rule 77    valor_impresion -> STRING
+Rule 78    valor_impresion -> VARIABLE
+Rule 79    valor_i_c -> NUMERO
+Rule 80    valor_i_c -> VARIABLE
+Rule 81    valor_array -> NUMERO
+Rule 82    valor_array -> STRING
+Rule 83    valor -> NUMERO
+Rule 84    valor -> VARIABLE
+Rule 85    valor -> DECIMAL
 
 Terminals, with rules where they appear
 
-AND                  : 
-ARRAY                : 
-ARRAY_KEY_FIRST      : 
+AND                  : 68
+ARRAY                : 44
+ARRAY_KEY_FIRST      : 42
 AS                   : 
-COMA                 : 
-COMMENT              : 
-CONCATENA_C          : 
-DECIMAL              : 12
-DECREMENTO           : 
-DECREMENTO_C         : 
-DESIGUALDAD          : 
-DIVIDE               : 7
-ECHO                 : 
-ELSE                 : 
-FALSE                : 
+COMA                 : 9 19
+COMMENT              : 15
+CONCATENA_C          : 30
+DECIMAL              : 85
+DECREMENTO           : 25 27
+DECREMENTO_C         : 29
+DESIGUALDAD          : 58
+DIVIDE               : 66
+ECHO                 : 17
+ELSE                 : 33
+FALSE                : 76
 FIN                  : 
 FLECHA               : 
 FOREACH              : 
-FUNCTION             : 
-IF                   : 
+FUNCTION             : 8
+IF                   : 32
 IGUAL                : 
-IGUALDAD             : 
-INCIO                : 
-INCREMENTO           : 
-INCREMENTO_C         : 
-LLAVE_D              : 
-LLAVE_I              : 
-MAS                  : 5
-MAYOR_IGUAL          : 
-MAYOR_QUE            : 
-MENOR_IGUAL          : 
-MENOR_QUE            : 
-MENOS                : 6
-MODULO               : 9
-NEGACION             : 
-NOMBRE_FUNCION       : 
-NUMERO               : 10
-OR                   : 
-PARENTESIS_D         : 3
-PARENTESIS_I         : 3
-POR                  : 8
-PRINT                : 
-PUNTO_COMA           : 
-SHUFFLE              : 
-STRING               : 
+IGUALDAD             : 57
+INCREMENTO           : 24 26
+INCREMENTO_C         : 28
+INICIO               : 
+LLAVE_D              : 8 31 32 33
+LLAVE_I              : 8 31 32 33
+MAS                  : 63
+MAYOR_IGUAL          : 62
+MAYOR_QUE            : 59
+MENOR_IGUAL          : 61
+MENOR_QUE            : 60
+MENOS                : 56 64
+MODULO               : 67
+NEGACION             : 49
+NOMBRE_FUNCION       : 8 43
+NUMERO               : 70 79 81 83
+OR                   : 69
+PARENTESIS_D         : 8 31 32 37 43 44 51 53
+PARENTESIS_I         : 8 31 32 37 43 44 51 53
+POR                  : 65
+PRINT                : 18
+PUNTO_COMA           : 12 17 18 21 22 23 37 43
+RETURN               : 12 13
+SHUFFLE              : 41
+STRING               : 30 77 82
 STR_REPEAT           : 
-STR_SHUFFLE          : 
-TRUE                 : 
-VARIABLE             : 11
-WHILE                : 
+STR_SHUFFLE          : 40
+TRUE                 : 75
+VARIABLE             : 9 10 24 25 26 27 28 29 30 37 71 73 78 80 84
+WHILE                : 31
 error                : 
 
 Nonterminals, with rules where they appear
 
-expresion            : 2 3 4 4 0
-operadoresMat        : 2 4
-valor                : 1 2
+argumentos_estructuras : 31 32
+argumentos_funciones : 8 9
+argumentos_impresion : 17 19
+asignacion           : 1
+booleans             : 72 74
+comentarios          : 6
+concatenacion        : 23
+creacion_funciones   : 
+crear_array          : 
+empty                : 11 14 34
+estructura_array     : 44
+estructura_array_c_v : 45
+estructura_array_v   : 46
+estructura_else      : 32
+estructuras_de_control : 4
+funcion_str_repeat   : 38
+funciones_creadas    : 13 39
+impresiones          : 3
+incremento_decremento : 21
+incrementoc_decrementoc : 22
+incrementos_decrementos_concatenacion : 5
+llamada_a_funciones  : 2
+metodos              : 37
+operacionU           : 54
+operacion_comparacion : 36 47 47
+operacion_logica     : 35
+operacion_matematica : 43 52 52 53 54
+operadores_comp      : 50 51
+operadores_logicos   : 47 48
+operadores_matematicos : 52
+retornar_valores     : 8
+sentencia_if         : 
+sentencia_while      : 
+sentencias_estructuras : 7 7 8 31 32 33 0
+valor                : 55
+valor_array          : 
+valor_comp           : 50 50 51 51
+valor_i_c            : 12 28 29
+valor_impresion      : 18 19 20
+valor_negacion       : 48 48 49
 
-Parsing method: LALR
-
-state 0
-
-    (0) S' -> . expresion
-    (1) expresion -> . valor
-    (2) expresion -> . valor operadoresMat expresion
-    (3) expresion -> . PARENTESIS_I expresion PARENTESIS_D
-    (4) expresion -> . expresion operadoresMat expresion
-    (10) valor -> . NUMERO
-    (11) valor -> . VARIABLE
-    (12) valor -> . DECIMAL
-
-    PARENTESIS_I    shift and go to state 3
-    NUMERO          shift and go to state 4
-    VARIABLE        shift and go to state 5
-    DECIMAL         shift and go to state 6
-
-    expresion                      shift and go to state 1
-    valor                          shift and go to state 2
-
-state 1
-
-    (0) S' -> expresion .
-    (4) expresion -> expresion . operadoresMat expresion
-    (5) operadoresMat -> . MAS
-    (6) operadoresMat -> . MENOS
-    (7) operadoresMat -> . DIVIDE
-    (8) operadoresMat -> . POR
-    (9) operadoresMat -> . MODULO
-
-    MAS             shift and go to state 8
-    MENOS           shift and go to state 9
-    DIVIDE          shift and go to state 10
-    POR             shift and go to state 11
-    MODULO          shift and go to state 12
-
-    operadoresMat                  shift and go to state 7
-
-state 2
-
-    (1) expresion -> valor .
-    (2) expresion -> valor . operadoresMat expresion
-    (5) operadoresMat -> . MAS
-    (6) operadoresMat -> . MENOS
-    (7) operadoresMat -> . DIVIDE
-    (8) operadoresMat -> . POR
-    (9) operadoresMat -> . MODULO
-
-  ! shift/reduce conflict for MAS resolved as shift
-  ! shift/reduce conflict for MENOS resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for POR resolved as shift
-  ! shift/reduce conflict for MODULO resolved as shift
-    $end            reduce using rule 1 (expresion -> valor .)
-    PARENTESIS_D    reduce using rule 1 (expresion -> valor .)
-    MAS             shift and go to state 8
-    MENOS           shift and go to state 9
-    DIVIDE          shift and go to state 10
-    POR             shift and go to state 11
-    MODULO          shift and go to state 12
-
-  ! MAS             [ reduce using rule 1 (expresion -> valor .) ]
-  ! MENOS           [ reduce using rule 1 (expresion -> valor .) ]
-  ! DIVIDE          [ reduce using rule 1 (expresion -> valor .) ]
-  ! POR             [ reduce using rule 1 (expresion -> valor .) ]
-  ! MODULO          [ reduce using rule 1 (expresion -> valor .) ]
-
-    operadoresMat                  shift and go to state 13
-
-state 3
-
-    (3) expresion -> PARENTESIS_I . expresion PARENTESIS_D
-    (1) expresion -> . valor
-    (2) expresion -> . valor operadoresMat expresion
-    (3) expresion -> . PARENTESIS_I expresion PARENTESIS_D
-    (4) expresion -> . expresion operadoresMat expresion
-    (10) valor -> . NUMERO
-    (11) valor -> . VARIABLE
-    (12) valor -> . DECIMAL
-
-    PARENTESIS_I    shift and go to state 3
-    NUMERO          shift and go to state 4
-    VARIABLE        shift and go to state 5
-    DECIMAL         shift and go to state 6
-
-    expresion                      shift and go to state 14
-    valor                          shift and go to state 2
-
-state 4
-
-    (10) valor -> NUMERO .
-
-    MAS             reduce using rule 10 (valor -> NUMERO .)
-    MENOS           reduce using rule 10 (valor -> NUMERO .)
-    DIVIDE          reduce using rule 10 (valor -> NUMERO .)
-    POR             reduce using rule 10 (valor -> NUMERO .)
-    MODULO          reduce using rule 10 (valor -> NUMERO .)
-    $end            reduce using rule 10 (valor -> NUMERO .)
-    PARENTESIS_D    reduce using rule 10 (valor -> NUMERO .)
-
-
-state 5
-
-    (11) valor -> VARIABLE .
-
-    MAS             reduce using rule 11 (valor -> VARIABLE .)
-    MENOS           reduce using rule 11 (valor -> VARIABLE .)
-    DIVIDE          reduce using rule 11 (valor -> VARIABLE .)
-    POR             reduce using rule 11 (valor -> VARIABLE .)
-    MODULO          reduce using rule 11 (valor -> VARIABLE .)
-    $end            reduce using rule 11 (valor -> VARIABLE .)
-    PARENTESIS_D    reduce using rule 11 (valor -> VARIABLE .)
-
-
-state 6
-
-    (12) valor -> DECIMAL .
-
-    MAS             reduce using rule 12 (valor -> DECIMAL .)
-    MENOS           reduce using rule 12 (valor -> DECIMAL .)
-    DIVIDE          reduce using rule 12 (valor -> DECIMAL .)
-    POR             reduce using rule 12 (valor -> DECIMAL .)
-    MODULO          reduce using rule 12 (valor -> DECIMAL .)
-    $end            reduce using rule 12 (valor -> DECIMAL .)
-    PARENTESIS_D    reduce using rule 12 (valor -> DECIMAL .)
-
-
-state 7
-
-    (4) expresion -> expresion operadoresMat . expresion
-    (1) expresion -> . valor
-    (2) expresion -> . valor operadoresMat expresion
-    (3) expresion -> . PARENTESIS_I expresion PARENTESIS_D
-    (4) expresion -> . expresion operadoresMat expresion
-    (10) valor -> . NUMERO
-    (11) valor -> . VARIABLE
-    (12) valor -> . DECIMAL
-
-    PARENTESIS_I    shift and go to state 3
-    NUMERO          shift and go to state 4
-    VARIABLE        shift and go to state 5
-    DECIMAL         shift and go to state 6
-
-    expresion                      shift and go to state 15
-    valor                          shift and go to state 2
-
-state 8
-
-    (5) operadoresMat -> MAS .
-
-    PARENTESIS_I    reduce using rule 5 (operadoresMat -> MAS .)
-    NUMERO          reduce using rule 5 (operadoresMat -> MAS .)
-    VARIABLE        reduce using rule 5 (operadoresMat -> MAS .)
-    DECIMAL         reduce using rule 5 (operadoresMat -> MAS .)
-
-
-state 9
-
-    (6) operadoresMat -> MENOS .
-
-    PARENTESIS_I    reduce using rule 6 (operadoresMat -> MENOS .)
-    NUMERO          reduce using rule 6 (operadoresMat -> MENOS .)
-    VARIABLE        reduce using rule 6 (operadoresMat -> MENOS .)
-    DECIMAL         reduce using rule 6 (operadoresMat -> MENOS .)
-
-
-state 10
-
-    (7) operadoresMat -> DIVIDE .
-
-    PARENTESIS_I    reduce using rule 7 (operadoresMat -> DIVIDE .)
-    NUMERO          reduce using rule 7 (operadoresMat -> DIVIDE .)
-    VARIABLE        reduce using rule 7 (operadoresMat -> DIVIDE .)
-    DECIMAL         reduce using rule 7 (operadoresMat -> DIVIDE .)
-
-
-state 11
-
-    (8) operadoresMat -> POR .
-
-    PARENTESIS_I    reduce using rule 8 (operadoresMat -> POR .)
-    NUMERO          reduce using rule 8 (operadoresMat -> POR .)
-    VARIABLE        reduce using rule 8 (operadoresMat -> POR .)
-    DECIMAL         reduce using rule 8 (operadoresMat -> POR .)
-
-
-state 12
-
-    (9) operadoresMat -> MODULO .
-
-    PARENTESIS_I    reduce using rule 9 (operadoresMat -> MODULO .)
-    NUMERO          reduce using rule 9 (operadoresMat -> MODULO .)
-    VARIABLE        reduce using rule 9 (operadoresMat -> MODULO .)
-    DECIMAL         reduce using rule 9 (operadoresMat -> MODULO .)
-
-
-state 13
-
-    (2) expresion -> valor operadoresMat . expresion
-    (1) expresion -> . valor
-    (2) expresion -> . valor operadoresMat expresion
-    (3) expresion -> . PARENTESIS_I expresion PARENTESIS_D
-    (4) expresion -> . expresion operadoresMat expresion
-    (10) valor -> . NUMERO
-    (11) valor -> . VARIABLE
-    (12) valor -> . DECIMAL
-
-    PARENTESIS_I    shift and go to state 3
-    NUMERO          shift and go to state 4
-    VARIABLE        shift and go to state 5
-    DECIMAL         shift and go to state 6
-
-    valor                          shift and go to state 2
-    expresion                      shift and go to state 16
-
-state 14
-
-    (3) expresion -> PARENTESIS_I expresion . PARENTESIS_D
-    (4) expresion -> expresion . operadoresMat expresion
-    (5) operadoresMat -> . MAS
-    (6) operadoresMat -> . MENOS
-    (7) operadoresMat -> . DIVIDE
-    (8) operadoresMat -> . POR
-    (9) operadoresMat -> . MODULO
-
-    PARENTESIS_D    shift and go to state 17
-    MAS             shift and go to state 8
-    MENOS           shift and go to state 9
-    DIVIDE          shift and go to state 10
-    POR             shift and go to state 11
-    MODULO          shift and go to state 12
-
-    operadoresMat                  shift and go to state 7
-
-state 15
-
-    (4) expresion -> expresion operadoresMat expresion .
-    (4) expresion -> expresion . operadoresMat expresion
-    (5) operadoresMat -> . MAS
-    (6) operadoresMat -> . MENOS
-    (7) operadoresMat -> . DIVIDE
-    (8) operadoresMat -> . POR
-    (9) operadoresMat -> . MODULO
-
-  ! shift/reduce conflict for MAS resolved as shift
-  ! shift/reduce conflict for MENOS resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for POR resolved as shift
-  ! shift/reduce conflict for MODULO resolved as shift
-    $end            reduce using rule 4 (expresion -> expresion operadoresMat expresion .)
-    PARENTESIS_D    reduce using rule 4 (expresion -> expresion operadoresMat expresion .)
-    MAS             shift and go to state 8
-    MENOS           shift and go to state 9
-    DIVIDE          shift and go to state 10
-    POR             shift and go to state 11
-    MODULO          shift and go to state 12
-
-  ! MAS             [ reduce using rule 4 (expresion -> expresion operadoresMat expresion .) ]
-  ! MENOS           [ reduce using rule 4 (expresion -> expresion operadoresMat expresion .) ]
-  ! DIVIDE          [ reduce using rule 4 (expresion -> expresion operadoresMat expresion .) ]
-  ! POR             [ reduce using rule 4 (expresion -> expresion operadoresMat expresion .) ]
-  ! MODULO          [ reduce using rule 4 (expresion -> expresion operadoresMat expresion .) ]
-
-    operadoresMat                  shift and go to state 7
-
-state 16
-
-    (2) expresion -> valor operadoresMat expresion .
-    (4) expresion -> expresion . operadoresMat expresion
-    (5) operadoresMat -> . MAS
-    (6) operadoresMat -> . MENOS
-    (7) operadoresMat -> . DIVIDE
-    (8) operadoresMat -> . POR
-    (9) operadoresMat -> . MODULO
-
-  ! shift/reduce conflict for MAS resolved as shift
-  ! shift/reduce conflict for MENOS resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for POR resolved as shift
-  ! shift/reduce conflict for MODULO resolved as shift
-    $end            reduce using rule 2 (expresion -> valor operadoresMat expresion .)
-    PARENTESIS_D    reduce using rule 2 (expresion -> valor operadoresMat expresion .)
-    MAS             shift and go to state 8
-    MENOS           shift and go to state 9
-    DIVIDE          shift and go to state 10
-    POR             shift and go to state 11
-    MODULO          shift and go to state 12
-
-  ! MAS             [ reduce using rule 2 (expresion -> valor operadoresMat expresion .) ]
-  ! MENOS           [ reduce using rule 2 (expresion -> valor operadoresMat expresion .) ]
-  ! DIVIDE          [ reduce using rule 2 (expresion -> valor operadoresMat expresion .) ]
-  ! POR             [ reduce using rule 2 (expresion -> valor operadoresMat expresion .) ]
-  ! MODULO          [ reduce using rule 2 (expresion -> valor operadoresMat expresion .) ]
-
-    operadoresMat                  shift and go to state 7
-
-state 17
-
-    (3) expresion -> PARENTESIS_I expresion PARENTESIS_D .
-
-    MAS             reduce using rule 3 (expresion -> PARENTESIS_I expresion PARENTESIS_D .)
-    MENOS           reduce using rule 3 (expresion -> PARENTESIS_I expresion PARENTESIS_D .)
-    DIVIDE          reduce using rule 3 (expresion -> PARENTESIS_I expresion PARENTESIS_D .)
-    POR             reduce using rule 3 (expresion -> PARENTESIS_I expresion PARENTESIS_D .)
-    MODULO          reduce using rule 3 (expresion -> PARENTESIS_I expresion PARENTESIS_D .)
-    $end            reduce using rule 3 (expresion -> PARENTESIS_I expresion PARENTESIS_D .)
-    PARENTESIS_D    reduce using rule 3 (expresion -> PARENTESIS_I expresion PARENTESIS_D .)
-
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: shift/reduce conflict for MAS in state 2 resolved as shift
-WARNING: shift/reduce conflict for MENOS in state 2 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 2 resolved as shift
-WARNING: shift/reduce conflict for POR in state 2 resolved as shift
-WARNING: shift/reduce conflict for MODULO in state 2 resolved as shift
-WARNING: shift/reduce conflict for MAS in state 15 resolved as shift
-WARNING: shift/reduce conflict for MENOS in state 15 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 15 resolved as shift
-WARNING: shift/reduce conflict for POR in state 15 resolved as shift
-WARNING: shift/reduce conflict for MODULO in state 15 resolved as shift
-WARNING: shift/reduce conflict for MAS in state 16 resolved as shift
-WARNING: shift/reduce conflict for MENOS in state 16 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 16 resolved as shift
-WARNING: shift/reduce conflict for POR in state 16 resolved as shift
-WARNING: shift/reduce conflict for MODULO in state 16 resolved as shift

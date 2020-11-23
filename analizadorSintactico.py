@@ -104,6 +104,25 @@ def p_estructura_array(p):
                       | estructura_array_v
   '''
 
+#Arlette
+def p_operacion_logica(p):
+  '''operacion_logica : operacion_comparacion operadores_logicos operacion_comparacion
+                      | valor_negacion operadores_logicos valor_negacion
+                      | NEGACION valor_negacion
+  '''
+def p_operacion_comparacion(p):
+  '''operacion_comparacion  : valor_comp operadores_comp valor_comp
+                            | PARENTESIS_I valor_comp operadores_comp valor_comp PARENTESIS_D
+  '''
+def p_operacion_matematica(p):
+  '''operacion_matematica : operacion_matematica operadores_matematicos operacion_matematica
+                          | PARENTESIS_I operacion_matematica PARENTESIS_D
+                          | operacionU operacion_matematica
+                          | valor
+  '''
+def p_operacionU(p):
+  '''operacionU : MENOS
+  '''
 
 #Miguel
 def p_operadores_comp(p):
