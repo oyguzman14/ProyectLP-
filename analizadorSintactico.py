@@ -1,29 +1,43 @@
 import ply.yacc as yacc
 from analizadorLexico import tokens
 
-#EXPRESIONES MATEMATICAS
 
-def p_expresion(p):
-  'expresion : valor'
-
-
-def p_operacionMat(p):
-  '''expresion : valor operadoresMat expresion
-               | PARENTESIS_I expresion PARENTESIS_D
-               | expresion operadoresMat expresion
+#Odalys
+def p_impresiones(p):
+  '''impresiones  : ECHO argumentos_impresion PUNTO_COMA
+                  | PRINT valor_impresion PUNTO_COMA
+  '''
+def p_argumentos_impresion(p):
+  '''argumentos_impresion : valor_impresion COMA argumentos_impresion
+                          | valor_impresion
   '''
 
-def p_operadoresMat(p):
-  '''operadoresMat  : MAS
-                    | MENOS
-                    | DIVIDE
-                    | POR
-                    | MODULO
+
+
+#Odalys
+def p_crear_array(p):
+  '''crear_array : ARRAY PARENTESIS_I estructura_array PARENTESIS_D
+  '''
+def p_estructura_array(p):
+  '''estructura_array : estructura_array_c_v
+                      | estructura_array_v
   '''
 
-def asignacion(p):
-  'expresion : VARIABLE IGUAL expresion PUNTO_COMA'
 
+
+#Odalys Guzman
+def p_valor_i_c(p):
+  '''valor_i_c  : NUMERO
+                | VARIABLE
+  '''
+
+#Odalys Guzman
+def p_valor_array(p):
+  '''valor_array  : NUMERO
+                  | STRING
+  '''
+
+#Odalys Guzman
 def p_valor(p):
   '''valor  : NUMERO
             | VARIABLE
