@@ -105,6 +105,15 @@ def p_estructura_array(p):
   '''
 
 #Arlette
+def p_estructura_array_c_v(p):
+  '''estructura_array_c_v : valor_array FLECHA valor_array COMA estructura_array
+                          | valor_array FLECHA valor_array
+  '''
+def p_estructura_array_v(p):
+  '''estructura_array_v : valor_array COMA estructura_array_v
+                        | valor_array
+  '''
+
 def p_operacion_logica(p):
   '''operacion_logica : operacion_comparacion operadores_logicos operacion_comparacion
                       | valor_negacion operadores_logicos valor_negacion
