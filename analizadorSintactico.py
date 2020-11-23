@@ -1,6 +1,20 @@
 import ply.yacc as yacc
 from analizadorLexico import tokens
 
+#Arlette
+def p_sentencias(p):
+  '''sentencias : INICIO sentencias FIN
+                | asignacion
+                | llamada_a_funciones
+                | impresiones
+                | estructuras_de_control
+                | incrementos_decrementos_concatenacion
+                | creacion_funciones
+                | comentarios
+                | sentencias sentencias
+  '''
+
+
 #MIGUEL
 def p_sentencias_estructuras(p):
   '''sentencias_estructuras : asignacion
