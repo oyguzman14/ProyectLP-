@@ -32,6 +32,35 @@ def p_comentarios(p):
 def p_empty(p):
   '''empty :
   '''
+#Odalys
+def p_impresiones(p):
+  '''impresiones  : ECHO argumentos_impresion PUNTO_COMA
+                  | PRINT valor_impresion PUNTO_COMA
+  '''
+def p_argumentos_impresion(p):
+  '''argumentos_impresion : valor_impresion COMA argumentos_impresion
+                          | valor_impresion
+  '''
+def p_incrementos_decrementos_concatenacion(p):
+  '''incrementos_decrementos_concatenacion : incremento_decremento PUNTO_COMA
+                                           | incrementoc_decrementoc PUNTO_COMA
+                                           | concatenacion  PUNTO_COMA
+  '''
+def p_incremento_decremento(p):
+  '''incremento_decremento  : INCREMENTO VARIABLE
+                            | DECREMENTO VARIABLE
+                            | VARIABLE INCREMENTO
+                            | VARIABLE DECREMENTO
+  '''
+def p_incrementoc_decrementoc(p):
+  '''incrementoc_decrementoc : VARIABLE INCREMENTO_C valor_i_c
+                            | VARIABLE DECREMENTO_C valor_i_c
+  '''
+def p_concatenacion(p):
+  '''concatenacion : VARIABLE CONCATENA_C STRING
+  '''
+
+
 #MIGUEL
 def p_sentencia_while(p):
   '''sentencia_while : WHILE PARENTESIS_I argumentos_estructuras PARENTESIS_D LLAVE_I sentencias_estructuras LLAVE_D
@@ -50,15 +79,7 @@ def p_metodos(p):
 def p_funciones_creadas(p):
   '''funciones_creadas : NOMBRE_FUNCION PARENTESIS_I operacion_matematica PARENTESIS_D PUNTO_COMA
   '''
-#Odalys
-def p_impresiones(p):
-  '''impresiones  : ECHO argumentos_impresion PUNTO_COMA
-                  | PRINT valor_impresion PUNTO_COMA
-  '''
-def p_argumentos_impresion(p):
-  '''argumentos_impresion : valor_impresion COMA argumentos_impresion
-                          | valor_impresion
-  '''
+
 
 
 
