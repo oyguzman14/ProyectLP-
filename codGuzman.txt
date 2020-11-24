@@ -1,0 +1,12 @@
+<?php
+$palabras = array("Promedio"=>"alumno");
+$promedio=65;
+if($promedio>60){
+    $promedio+=10;
+    echo "aprobo", $promedio;
+	++$promedio;
+}else{
+	$promedio--;
+	print "no aprobo lo siento";
+}
+?>
