@@ -10,10 +10,10 @@ def p_sentencias(p):
                 | estructuras_de_control
                 | incrementos_decrementos_concatenacion
                 | creacion_funciones
+                | asigancion_funciones
                 | comentarios
                 | sentencias sentencias
   '''
-
 
 #MIGUEL
 def p_sentencias_estructuras(p):
@@ -22,7 +22,8 @@ def p_sentencias_estructuras(p):
                             | impresiones
                             | estructuras_de_control
                             | incrementos_decrementos_concatenacion
-                            | comentarios  
+                            | comentarios
+                            | asigancion_funciones
                             | sentencias_estructuras sentencias_estructuras
 '''
 
@@ -46,30 +47,6 @@ def p_comentarios(p):
 def p_empty(p):
   '''empty :
   '''
-#Odalys
-def p_impresiones(p):
-  '''impresiones  : ECHO argumentos_impresion PUNTO_COMA
-                  | PRINT valor_impresion PUNTO_COMA
-  '''
-def p_argumentos_impresion(p):
-  '''argumentos_impresion : valor_impresion COMA argumentos_impresion
-                          | valor_impresion
-  '''
-
-
-#Arlette
-def p_asignacion(p):
-  '''asignacion : VARIABLE IGUAL cuerpo_asignacion PUNTO_COMA
-  '''
-def p_cuerpo_asignacion(p):
-  '''cuerpo_asignacion  : expresion
-                        | operacion_logica
-                        | STRING
-                        | booleans
-                        | crear_array
-  '''
-
-
 #Odalys
 def p_incrementos_decrementos_concatenacion(p):
   '''incrementos_decrementos_concatenacion : incremento_decremento PUNTO_COMA
@@ -118,16 +95,20 @@ def p_aregumentos_estructuras(p):
                             | operacion_comparacion
   '''
 
+def p_asigancion_funciones(p):
+  ''' asigancion_funciones : VARIABLE IGUAL llamada_a_funciones
+  '''
+
 #Miguel
 def p_llamda_a_funciones(p):
   '''llamada_a_funciones  : metodos PARENTESIS_I VARIABLE PARENTESIS_D PUNTO_COMA
                           | funcion_str_repeat
                           | funciones_creadas
+                          | array_key_first
   '''
 def p_metodos(p):
   '''metodos  : STR_SHUFFLE
               | SHUFFLE
-              | ARRAY_KEY_FIRST
   '''
 def p_funciones_creadas(p):
   '''funciones_creadas : NOMBRE_FUNCION PARENTESIS_I operacion_matematica PARENTESIS_D PUNTO_COMA
@@ -137,7 +118,31 @@ def p_funciones_creadas(p):
 def p_funcion_str_repeat(p):
   ''' funcion_str_repeat : STR_REPEAT PARENTESIS_I STRING COMA NUMERO PARENTESIS_D PUNTO_COMA
   '''
+def p_array_key_first(p):
+  '''array_key_first : ARRAY_KEY_FIRST PARENTESIS_I VARIABLE PARENTESIS_D PUNTO_COMA
+  '''
 
+#Odalys Guzman
+def p_impresiones(p):
+  '''impresiones  : ECHO argumentos_impresion PUNTO_COMA
+                  | PRINT valor_impresion PUNTO_COMA
+  '''
+def p_argumentos_impresion(p):
+  '''argumentos_impresion : valor_impresion COMA argumentos_impresion
+                          | valor_impresion
+  '''
+
+#Arlette
+def p_asignacion(p):
+  '''asignacion : VARIABLE IGUAL cuerpo_asignacion PUNTO_COMA
+  '''
+def p_cuerpo_asignacion(p):
+  '''cuerpo_asignacion  : expresion
+                        | operacion_logica
+                        | STRING
+                        | booleans
+                        | crear_array
+  '''
 
 #Odalys
 def p_crear_array(p):
@@ -247,11 +252,15 @@ def p_error(p):
 
 parser = yacc.yacc()
 
-while True:
-  try:
-    s=input('>> ')
-  except EOFError:
-     break
-  if not s : continue
-  result = parser.parse(s)
-  print(result)
+try:
+  p=open('codigo2.txt', 'r')
+  s=''
+  for linea in p:
+    s+=linea.replace('\n' ,' '). replace( '\t',' ')
+except EOFError:
+  print('Error')
+
+if not s: print('No error')
+
+result=parser.parse(s)
+print(result)

@@ -101,7 +101,7 @@ def t_newline(t):
 t_ignore = ' \t'
 
 def t_COMMENT(t):
-    r'\/\*.+\*\/'
+    r'\#.+'
     return t
 
 def t_error(t):
