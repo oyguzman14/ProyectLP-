@@ -1,0 +1,13 @@
+<?php
+function multiplicar($n1,$n2){
+  $resultado= $n1*$n2;
+  return $resultado;
+}
+$contador=20;
+while($contador>0){
+  --$contador;
+  $res=multiplicar($contador+4);
+  echo "El resultado es ", $res;
+}
+?>
+
