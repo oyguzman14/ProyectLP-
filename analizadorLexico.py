@@ -120,3 +120,21 @@ lexer=lex.lex()
 #     if not tok:
 #       break
 #     print(tok)
+def imprimirLex(texto):
+    c=texto.split('\n')
+    cadena=""
+    for i in c:
+        scadena1=">> " + i
+        cadena+="\n"
+        cadena+=scadena1
+        lex.input(i)
+        while True:
+            tok = lexer.token()
+            if not tok:
+                break
+            cadena+="\n"
+            scadena2=str(tok)
+            cadena+=scadena2
+        cadena+="\n"
+    return cadena
+
