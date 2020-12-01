@@ -68,7 +68,7 @@ t_IGUALDAD = r'=='
 t_DESIGUALDAD = r'\!\='
 t_MAYOR_QUE = r'>'
 t_MENOR_QUE = r'<'
-t_STRING = r'("[\w\s\\n\?]+"|\'[\w\s\\n\?]+\')'
+t_STRING = r'("[\w\s\\n\?\,]+"|\'[\w\s\\n\?\,]+\')'
 t_MENOR_IGUAL = r'\<='
 t_MAYOR_IGUAL = r'\>='
 t_INCREMENTO = r'\+\+'
@@ -85,7 +85,7 @@ t_PARENTESIS_D = r'\)'
 t_LLAVE_I = r'\{'
 t_LLAVE_D = r"\}"
 t_NUMERO = r'\d+'
-t_DECIMAL = r'[+-]?[0-9]*\.[0-9]+'
+t_DECIMAL = r'[0-9]*\.[0-9]+'
 t_COMA = r'\,'
 
 def t_NOMBRE_FUNCION(t):
@@ -127,4 +127,3 @@ def imprimirLex(texto):
             cadena+=scadena2
         cadena+="\n"
     return cadena
-
