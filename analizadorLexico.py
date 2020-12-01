@@ -57,7 +57,7 @@ tokens = (
     "COMMENT") + tuple(reservadas.values())
 
 t_IGUAL = r'='
-t_VARIABLE = r'(\$([a-z]|[A-Z]))([a-zA-Z0-9]+)?'
+t_VARIABLE = r'(\$([a-z]|[A-Z]))([a-zA-Z0-9_]+)?'
 t_MAS = r'\+'
 t_MENOS = r'\-'
 t_POR = r'\*'
@@ -108,18 +108,8 @@ def t_error(t):
     print("No es reconocido '%s'" % t.value[0])
     t.lexer.skip(1)
 
-
 lexer=lex.lex()
-# data=open("codigo.txt",'r')
 
-# for i in data:
-#   print(">> "+i)
-#   lex.input(i)
-#   while True:
-#     tok = lexer.token()
-#     if not tok:
-#       break
-#     print(tok)
 def imprimirLex(texto):
     c=texto.split('\n')
     cadena=""

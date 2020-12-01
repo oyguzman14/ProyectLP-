@@ -18,11 +18,11 @@ def p_sentencias(p):
   '''
 
   if str(p[1])=="<?php":
-    print('CODIGO PHP')
+    buffer.append('CODIGO PHP')
   elif p[1]==None:
     print(end='')
   else:
-    print(p[1])
+    buffer.append(p[1])
 
 #Miguel Rivadeneira
 def p_sentencias_estructuras(p):
@@ -38,7 +38,7 @@ def p_sentencias_estructuras(p):
   if p[1]==None:
     print(end='')
   else:
-    print(p[1])
+    buffer.append(p[1])
 
 #Miguel Rivadeneira
 def p_creacion_funciones(p):
@@ -156,11 +156,11 @@ def p_llamda_a_funciones(p):
                           | array_key_first
   '''
   if (str(p[1]) == "str_shuffle"):
-    print('LLAMADA A LA FUNCION STR_SHUFFLE')
+    buffer.append('LLAMADA A LA FUNCION STR_SHUFFLE')
   elif (str(p[1]) == "shuffle"):
-    print('LLAMADA A LA FUNCION SHUFFLE')
+    buffer.append('LLAMADA A LA FUNCION SHUFFLE')
   else:
-    print('LLAMADA A LA ' + str(p[1]))
+    buffer.append('LLAMADA A LA ' + str(p[1]))
 
 #Miguel Rivadeneira
 def p_metodos(p):
@@ -214,11 +214,11 @@ def p_cuerpo_asignacion(p):
                         | crear_array
   '''
   if (p[1] == None):
-    print('ASIGNACION BOOLEAN')
+    buffer.append('ASIGNACION BOOLEAN')
   elif (str(p[1]).find("\"") != -1):
-    print('ASIGNACION STRING')
+    buffer.append('ASIGNACION STRING')
   else:
-    print('ASIGNACION ' + str(p[1]))
+    buffer.append('ASIGNACION ' + str(p[1]))
 
 #Odalys Guzman
 def p_crear_array(p):
@@ -273,6 +273,7 @@ def p_operacion_matematica(p):
                           | operacionU operacion_matematica
                           | valor
   '''
+  if (len(p)==2):p[0]=p[1]
   p[0] = 'OPERACION MATEMATICA'
 
 #Arlette Cotrina
@@ -298,6 +299,7 @@ def p_operadores_matematicos(p):
                             | DIVIDE
                             | MODULO
   '''
+  p[0]=p[1]
 
 #Miguel Rivadeneira
 def p_operadores_logicos(p):
@@ -348,22 +350,50 @@ def p_valor(p):
             | VARIABLE
             | DECIMAL
   '''
+  if(p[1].isdigit()):
+    p[0]="NUMERO"
+    pass
+  else:
+    try:
+      float(p[1])
+      p[0]="DECIMAL"
+    except Exception:
+      p[0]="VARIABLE"
+
 
 #Arlette Cotrina
 def p_error(p):
-  print("Error de sintaxis")
+  if p != None:
+    p = str(p).split(",")
+    buffer.append("ERROR DE SINTAXIS ANTES DEL TOKEN\t%s" % p[1])
+  print(p)
 
 parser = yacc.yacc()
+def imprimirSintactico(texto):
+  buffer[:]=[]
+  try:
+    s=texto.strip()
+  except EOFError:
+    print("error")
+  if not s : print ("Error")
+  parser.parse(s)
 
-try:
-  p=open('codRivadeneira.txt', 'r')
-  s=''
-  for linea in p:
-    s+=linea.replace('\n' ,' '). replace( '\t',' ')
-except EOFError:
-  print('Error')
+  sentencias = texto.split(" ")
+  inicio = "<?php" in sentencias
+  fin = "?>" in sentencias
 
-if not s: print('No error')
+  if inicio and fin:
+    buffer.insert(0, "INICIO DE CÓDIGO")
+    buffer[-1] = "FIN DE CÓDIGO"
+    pass
+  elif inicio and not fin:
+    buffer.insert(0, "NICIO DE CÓDIGO")
+    buffer.append("ERROR DE FIN DE CÓDIGO")
+  elif not inicio and fin:
+    buffer.insert(0, "ERROR DE INICIO DE CÓDIGO")
+    buffer.append("FIN DE CÓDIGO")
+  else:
+    buffer.insert(0, "ERROR DE INICIO DE CÓDIGO")
+    buffer.append("ERROR DE FIN DE CÓDIGO")
 
-result=parser.parse(s)
-print(result)
+  return buffer
